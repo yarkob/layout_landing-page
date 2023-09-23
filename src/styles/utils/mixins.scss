@@ -1,0 +1,83 @@
+@mixin onTablet {
+  @media (min-width: $tablet-min-width) {
+    @content;
+  }
+}
+
+@mixin onDesktop {
+  @media (min-width: $desktop-min-width) {
+    @content;
+  }
+}
+
+@mixin contentPaddingInline() {
+  padding-inline: 20px;
+
+  @include onTablet {
+    padding-inline: 72px;
+  }
+
+  @include onDesktop() {
+    min-width: 1020px;
+    margin-inside: auto;
+    padding-inline: 120px;
+  }
+}
+
+.container {
+  @include contentPaddingInline;
+}
+
+@mixin hover($property, $toValue) {
+  transition: #{$property} 0.3s;
+
+  &:hover {
+    #{$property}: $toValue;
+  }
+}
+
+@mixin formInput() {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  outline: none;
+  border: none;
+}
+
+@mixin formInputHover() {
+  border: 1px solid #dbdbdb;
+}
+
+@mixin formInputFocus() {
+  border: 1px solid #f98921;
+}
+
+@mixin pageGrid {
+  --columns: 2;
+  display: grid;
+  column-gap: 20px;
+  grid-template-columns: repeat(var(--columns), 1fr);
+
+  @include onTablet {
+    --columns: 6;
+    column-gap: 24px;
+  }
+
+  @include onDesktop {
+    --columns: 12;
+  }
+}
+
+@mixin button($background-color) {
+  background-color: $background-color;
+  width: 100%;
+  height: 48px;
+  border-radius: 8px;
+  color: #fff;
+  border: none;
+  padding: 0 48px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 27px;
+}
